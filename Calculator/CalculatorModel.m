@@ -61,6 +61,8 @@
         result = sqrt([self popOperand]);
     else if([operation isEqualToString:@"∏"])
         result = M_PI;
+    else if ([operation isEqualToString:@"log"])
+        result = log([self popOperand]);
     [self pushOperand:result];
     return result;
 }

@@ -38,7 +38,8 @@ int count=0;
 - (IBAction)digitPressed:(UIButton *)sender {
     NSString *digit = [sender currentTitle];
     if(self.userIsTyping){
-        if([@"." isEqualToString:digit]) count++;
+        if([@"." isEqualToString:digit])
+            count++;
         if (count<=1)
             self.display.text = [self.display.text stringByAppendingString:digit];
         else{
@@ -61,6 +62,7 @@ int count=0;
     double result = [self.modelConnection performOperation:sender.currentTitle];
     NSString *resultString = [NSString stringWithFormat:@"%g",result];
     self.display.text = resultString;
+    self.programDisplay.text = [self.programDisplay.text stringByAppendingString:@"="];
 }
 
 - (IBAction)equalToPressed {
@@ -75,6 +77,11 @@ int count=0;
     [self.programOutput removeAllObjects];
     self.display.text = @"0";
     [self.modelConnection clearOperandStack:YES];
+}
+- (IBAction)backSpacePressed {
+    if(self.userIsTyping){
+        self.display.text = [self.display.text substringToIndex:[self.display.text length]-1];
+    }
 }
 
 @end
